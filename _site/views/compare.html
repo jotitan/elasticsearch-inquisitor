@@ -10,7 +10,6 @@
         List index
         <button type="button" ng-click="createIndex()" class="btn">Ajout index</button>
 
-
         <div ng-repeat="newIndex in newIndexes">
             <span style="background-color:{{newIndex.color}};width:30px;height:15px;display:inline-block"></span>
             <span style="color:{{newIndex.color}}">{{newIndex.id}}</span>
@@ -25,11 +24,15 @@
                 <option ng-repeat="tokenizer in tokenizers">{{tokenizer.label}}</option>
             </select>
             Filters :
-            <select size="3">
-                <option ng-repeat="filter in filters" value="{{filter.name}}">
+            <select>
+                <option ng-repeat="filter in filters" value="{{filter.name}}" title="{{filter.description}}">
                     {{filter.label}}
                 </option>
             </select>
+		  <button ng-click="newIndex.filters.push()">Ajouter</button>
+		  <select size="3">
+			 <option ng-repeat="filter in newIndex.filters">{{filter.name}}</option>
+		  </select>
         </div>
 
     </div>
