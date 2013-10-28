@@ -1,0 +1,71 @@
+<div class="container-fluid" id="content" style="margin-top:20px" xmlns="http://www.w3.org/1999/html">
+    <div id="config" ng-controller="CompareInput">
+        Host : <input type="text" ng-model="data.host" ng-cloak/>
+        Prefix : <input type="text" ng-model="data.prefix" ng-cloak/>
+        <button type="button" ng-click="infoChanged()" class="btn">Se connecter</button>
+
+    </div>
+
+    <div ng-controller="IndexCtrl">
+        List index
+        <button type="button" ng-click="createIndex()" class="btn">Ajout index</button>
+
+
+        <div ng-repeat="newIndex in newIndexes">
+            <span style="background-color:{{newIndex.color}};width:30px;height:15px;display:inline-block"></span>
+            <span style="color:{{newIndex.color}}">{{newIndex.id}}</span>
+            <select>
+                <option value="0">Indexation et recherche</option>
+                <option value="1">Indexation</option>
+                <option value="2">Recherche</option>
+            </select>
+
+            <select>
+                <option style="font-style: italic">Tokenizer</option>
+                <option ng-repeat="tokenizer in tokenizers">{{tokenizer.label}}</option>
+            </select>
+            Filters :
+            <select size="3">
+                <option ng-repeat="filter in filters" value="{{filter.name}}">
+                    {{filter.label}}
+                </option>
+            </select>
+        </div>
+
+    </div>
+
+
+
+
+    Indexes
+    <div ng-controller="IndexCtrl">
+        <div ng-repeat="index in indexes">
+            <span style="background-color:{{index.color}};width:30px;height:15px;display:inline-block"></span>
+            &nbsp;&nbsp;
+            <span style="color:{{index.color}}">{{index.id}}</span>
+            <span ng-switch on="index.different">
+                <span ng-switch-when="true">
+                    <span style="color:red;font-weight:bold">index</span> : tokenizer {{index.tokenizer.name}},
+                   	<span ng-if="{index.filters.length > 0}" style="font-weight:bold">
+                        Filtres : {{index.showFilters(index.filters)}}
+                   	</span>
+
+                   	<span style="color:red;font-weight:bold">search</span> : tokenizer {{index.tokenizerSearch.name}}
+                    <span ng-if="{index.filtersSearch.length > 0}" style="font-weight:bold">
+                        Filtres : {{index.showFilters(index.filtersSearch)}}
+                    </span>
+
+                </span>
+                <span ng-switch-default>
+                    tokenizer {{index.tokenizer.name}}
+                    <span ng-if="{index.filters.length > 0}">
+                        Filtres : {{index.showFilters(index.filters)}}
+                    </span>
+                </span>
+            </span>
+
+
+        </div>
+
+    </div>
+</div> <!-- /container -->

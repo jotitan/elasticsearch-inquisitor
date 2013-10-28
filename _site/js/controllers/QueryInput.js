@@ -9,6 +9,7 @@ function QueryInput($scope, $http, $filter, Data, pubsub){
 
     $scope.$watch('data.query', function(value){
         try {
+			console.log("Auto")
             $scope.autodetectField();
         } catch (e) {}
     })
